@@ -111,7 +111,7 @@ Write-host "`r - Success!"
 Write-Host "Downloading Chrome" -NoNewline
 (New-Object System.Net.WebClient).DownloadFile("https://s3.amazonaws.com/parseccloud/image/parsec+desktop.png", "C:\ParsecTemp\parsec+desktop.png")
 (New-Object System.Net.WebClient).DownloadFile("https://s3.amazonaws.com/parseccloud/image/white_ico_agc_icon.ico", "C:\ParsecTemp\white_ico_agc_icon.ico")
-(New-Object System.Net.WebClient).DownloadFile("https://raw.githubusercontent.com/jamesstringerparsec/Cloud-GPU-Updater/master/GPU%20Updater%20Tool.ps1", "$env:APPDATA\ParsecLoader\GPU Updater Tool.ps1")
+(New-Object System.Net.WebClient).DownloadFile("https://raw.githubusercontent.com/cloudrig/Cloud-GPU-Updater/master/GPU%20Updater%20Tool.ps1", "$env:APPDATA\ParsecLoader\GPU Updater Tool.ps1")
 (New-Object System.Net.WebClient).DownloadFile("https://dl.google.com/tag/s/dl/chrome/install/googlechromestandaloneenterprise64.msi", "C:\ParsecTemp\Apps\googlechromestandaloneenterprise64.msi")
 Write-host "`r - Success!"
 }
@@ -345,7 +345,7 @@ Write-Output "VNC has been installed on this computer using Port 5900 and Passwo
 
 #Creates shortcut for the GPU Updater tool
 function gpu-update-shortcut {
-(New-Object System.Net.WebClient).DownloadFile("https://raw.githubusercontent.com/jamesstringerparsec/Cloud-GPU-Updater/master/GPU%20Updater%20Tool.ps1", "$ENV:Appdata\ParsecLoader\GPU Updater Tool.ps1")
+(New-Object System.Net.WebClient).DownloadFile("https://raw.githubusercontent.com/cloudrig/Cloud-GPU-Updater/master/GPU%20Updater%20Tool.ps1", "$ENV:Appdata\ParsecLoader\GPU Updater Tool.ps1")
 Unblock-File -Path "$ENV:Appdata\ParsecLoader\GPU Updater Tool.ps1"
 Write-Output "GPU-Update-Shortcut"
 $Shell = New-Object -ComObject ("WScript.Shell")
