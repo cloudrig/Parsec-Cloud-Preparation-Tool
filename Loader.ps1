@@ -59,8 +59,22 @@ Start-Sleep -s 1
 #Unblocking all script files
 Write-Output "Unblocking files just in case"
 Get-ChildItem -Path $path\ParsecTemp -Recurse | Unblock-File
-Write-Output "Starting main script..."
-#start-process powershell.exe -verb RunAS -argument "-file $path\parsectemp\PostInstall\PostInstall.ps1"
-#Start-Sleep -Seconds 60
-# Remove the asynchronous run as we want to block the SSM automation
-powershell.exe -file $path\parsectemp\PostInstall\PostInstall.ps1
+Write-Output "Starting main script, this Window will close in 60 seconds"
+#$path = [Environment]::GetFolderPath("Desktop")
+#start-process powershell.exe -Wait -PassThru -verb RunAS -argument "-file $path\parsectemp\PostInstall\PostInstall.ps1"
+
+$pinfo = New-Object System.Diagnostics.ProcessStartInfo
+$pinfo.FileName = "$path\parsectemp\PostInstall\PostInstall.ps1"
+$pinfo.Verb = 'RunAs'
+$pinfo.RedirectStandardError = $true
+$pinfo.RedirectStandardOutput = $true
+$pinfo.UseShellExecute = $false
+$p = New-Object System.Diagnostics.Process
+$p.StartInfo = $pinfo
+$p.Start()
+$p.WaitForExit()
+$stdout = $p.StandardOutput.ReadToEnd()
+$stderr = $p.StandardError.ReadToEnd()
+Write-Host "stdout: $stdout"
+Write-Host "stderr: $stderr"
+Write-Host "exit code: " + $p.ExitCode
