@@ -50,7 +50,8 @@
     
 "                                         
 Write-Output "Setting up Environment"
-$path = [Environment]::GetFolderPath("Desktop")
+#$path = [Environment]::GetFolderPath("Desktop")
+$path = "C:\Users\Administrator\"
 if((Test-Path -Path $path\ParsecTemp )-eq $true){} Else {New-Item -Path $path\ParsecTemp -ItemType directory | Out-Null}
 Unblock-File -Path .\*
 copy-Item .\* -Destination $path\ParsecTemp\ -Recurse | Out-Null
@@ -64,11 +65,12 @@ Write-Output "Starting main script, this Window will close in 60 seconds"
 #start-process powershell.exe -Wait -PassThru -verb RunAS -argument "-file $path\parsectemp\PostInstall\PostInstall.ps1"
 
 $pinfo = New-Object System.Diagnostics.ProcessStartInfo
-$pinfo.FileName = "$path\parsectemp\PostInstall\PostInstall.ps1"
+$pinfo.FileName = "powershell.exe"
 $pinfo.Verb = 'RunAs'
 $pinfo.RedirectStandardError = $true
 $pinfo.RedirectStandardOutput = $true
 $pinfo.UseShellExecute = $false
+$pinfo.Arguments = "-file $path\parsectemp\PostInstall\PostInstall.ps1"
 $p = New-Object System.Diagnostics.Process
 $p.StartInfo = $pinfo
 $p.Start()
